@@ -1,1 +1,2 @@
 # platform-game
+# my game will be a 2d platforming game. the player will take control of a character who is able to move horizontally across the screen as well as jump. the objective of the game will be to collect all the coins in the fastest time possible. the player will have to avoid touching the spike objects in order to not lose health. if the player loses all their health they will be reset from the beginning.
