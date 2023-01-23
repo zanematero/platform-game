@@ -19,7 +19,7 @@ main {
 
 article {
     position: absolute;
-    background-color: lightgrey;
+    background-color: rgb(47, 0, 87);
     height: 35em;
     width: 25em;
     display: inline-block;
@@ -27,7 +27,7 @@ article {
 
 article > h2 {
     text-align: center;
-    color: black;
+    color: rgb(255, 255, 255);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
