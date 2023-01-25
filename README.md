@@ -1,2 +1,10 @@
 # platform-game
-# my game will be a 2d platforming game. the player will take control of a character who is able to move horizontally across the screen as well as jump. the objective of the game will be to collect all the coins in the fastest time possible. the player will have to avoid touching the spike objects in order to not lose health. if the player loses all their health they will be reset from the beginning.
+# Hello! Welcome to Platform Quick!
+In this game you will be a user controlled dinosaur!
+You will be able to use the arrow keys to move left, right, and jump.
+The goal of this game is to collect all the food.
+Once you have done so, you will have won!
+However, be careful with your movement as there are many platforms to traverse and gaps to be fallen through.
+You will also need to keep an eye out for dangerous spikes!
+If you touch one of these, you will be forcefully reset from the beginning.
+Goodluck!
