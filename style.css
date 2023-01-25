@@ -41,3 +41,36 @@ p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bolder;
 }
+
+li {
+    padding: 1em 1em 1em 0em;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    width: 5em;
+    height: 3em;
+    text-decoration: none;
+    background-color: rgb(255, 102, 0);
+    color: white;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0.25em 0.25em 0.25em rgb(0, 0, 0);
+}
+
+button:hover {
+    width: 5.5em;
+    height: 3.33em;
+    text-decoration: none;
+    background-color: rgb(255, 102, 0);
+    color: white;
+    font-weight: bolder;
+    border: none;
+    box-shadow: 0.25em 0.25em 0.5em rgb(0, 0, 0);
+}

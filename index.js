@@ -1,11 +1,43 @@
-// Function to add game elements
-function newImage(url){
-    let image = document.createElement('img')
-    image.src = url
-    image.style.position = 'absolute'
+// Ability to reset
+/* var button = document.getElementById("button");
+button.addEventListener ('DOMContentLoaded', function(){
+    function refresh() {
+        window.location.reload()
+    }
+    button.addEventListener('onclick', refresh);
+    document.addEventListener('keydown', keydown);
+    document.addEventListener('keyup', keyup);
+}) */
+
+// Function to add player image
+function newPlayer(url){
+    let image = document.createElement('img');
+    image.src = url;
+    image.style.position = 'absolute';
+    return image;
+}
+
+// Function to add reset and score elements
+/* function move(url) {
+    let image = document.createElement('img');
+    image.src = url;
+    element.style.position = 'absolute';
     document.body.append(image)
     return image
-}
+    
+    function moveToCoordinates(left, bottom) {
+        element.style.left = left + 'px'
+        element.style.bottom = bottom + 'px'
+        document.getElementsByTagName('img').style.zIndex = "1";
+    }
+
+    return {
+        to: moveToCoordinates
+    }
+} */
+
+/* move(newImage('assets/turkey.png')).to(450, 140)
+move(newImage('assets/spike.png')).to(200, 140) */
 
 // Canvas creation
 function createCanvas() {
@@ -21,27 +53,34 @@ ctx.canvas.width = cWidth;
 
 // Set player stats
 var playerInfo = {
-    x: 10,
-    y: 130,
-    friction: 0,
-    gravity: 0,
+    x: 75,
+    y: 400,
+    xVelocity: 0,
+    yVelocity: 0,
     jumping: true,
     height: 85,
-    width: 85,
-    jumpAnimation: "assets/jump.png",
-    leftJumpAnimation: "assets/jump_back.png",
-    leftAnimation: "assets/run_back.png",
-    rightAnimation: "assets/run.png",
-    standAnimation: "assets/stand.png",
-    stanceCurrent: "assets/stand.png"
+    width: 85
 };
-if (playerInfo.friction > -1 && playerInfo.friction < 1) {
-    playerInfo.stanceCurrent = playerInfo.standAnimation;
+
+let stanceCurrent = "assets/stand.png"
+
+var animation = {
+    jump: "assets/jump.png",
+    leftJump: "assets/jump_back.png",
+    left: "assets/run_back.png",
+    right: "assets/run.png",
+    stand: "assets/stand.png"
 }
+
+if (playerInfo.xVelocity > -1 && playerInfo.xVelocity < 1) {
+    stanceCurrent = animation.stand;
+}
+
 // Assigning canvas element for player to detect collision
 function createPlayer() {
     ctx.fillStyle = "#F08080";
-    img = newImage(playerInfo.stanceCurrent);
+    img = newPlayer(stanceCurrent);
+    console.log(stanceCurrent)
     ctx.drawImage(img, (playerInfo.x) - playerInfo.width, (playerInfo.y) - playerInfo.height);
 }
 
@@ -51,51 +90,53 @@ var keysCurrent = {
     left: false,
     jump: false
 }
-var movementGravity = 0.5;
-var movementFriction = 0.5;
+
+var movementGravity = 0.6;
+
+var movementFriction = 0.7;
 
 function keydown(e) {
     // Left arrow
     if (e.keycode == 37) {
         keysCurrent.left = true;
+        console.log('left')
     }
     // Up arrow
     if (e.keycode == 38) {
         if (playerInfo.jump == false) {
-            playerInfo.gravity = -5;
+            playerInfo.yVelocity = -5;
+            console.log('jump')
         }
     }
     // Right arrow
     if (e.keycode == 39) {
         keysCurrent.right = true;
+        console.log('right')
     }
 }
-document.addEventListener("keydown", keydown);
 
 function keyup(e){
     if (e.keycode == 37) {
         keysCurrent.left = false;
+        console.log('left')
     }
     if (e.keycode == 38) {
-        if (playerInfo.gravity < -1) {
-            playerInfo.gravity = -3;
+        if (playerInfo.yVelocity < -1) {
+            playerInfo.yVelocity = -3;
+            console.log('jump')
         }
     }
     if (e.keycode == 39) {
         keysCurrent.right = false;
+        console.log('right')
     }
 }
-document.addEventListener("keyup", keyup);
-
-/* move(newImage('assets/turkey.png')).to(450, 140)
-move(newImage('assets/spike.png')).to(200, 140) */
 
 // Platform creation
 var platforms = []
-var platformCount = 5;
+var platformCount = 4;
 function renderPlatform() {
     ctx.fillStyle = "#45597E";
-    // using platforms.length in case we want to add or remove platforms 
     for (i = 0; i < platforms.length; i++) {
         ctx.fillRect(platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);
     }
@@ -104,10 +145,29 @@ function renderPlatform() {
 // Platform location assignment
 function createPlatform() {
     for (i = 0; i < platformCount; i++) {
+        // Row 1
         platforms.push(
             {
-                x: 100 * (8 * i),
-                y: 200 + (18 * i),
+                x: 2.5 * (i * 100),
+                y: 275,
+                width: 100,
+                height: 10
+            }
+        );
+        // Row 2
+        platforms.push(
+            {
+                x: 2.5 * (i * 100),
+                y: 450,
+                width: 100,
+                height: 10
+            }
+        );
+        // Row 3
+        platforms.push(
+            {
+                x: 2.5 * (i * 100),
+                y: 100,
                 width: 100,
                 height: 10
             }
@@ -118,23 +178,23 @@ function createPlatform() {
 // Logic to check and apply movement/collision
 function checkStatus() {
     if (playerInfo.jumping == false) {
-        playerInfo.friction *= movementFriction;
+        playerInfo.xVelocity *= movementFriction;
     } else {
-        playerInfo.gravity += movementGravity;
-        playerInfo.stanceCurrent = playerInfo.jumpAnimation
+        playerInfo.yVelocity += movementGravity;
+        stanceCurrent = animation.jump;
     }
     playerInfo.jumping = true;
 
     if (keysCurrent.left) {
-        playerInfo.friction = -5;
-        playerInfo.stanceCurrent = playerInfo.leftAnimation
+        playerInfo.xVelocity = -5;
+        stanceCurrent = animation.left;
     }
     if (keysCurrent.right) {
-        playerInfo.friction = 5;
-        playerInfo.stanceCurrent = playerInfo.rightAnimation
+        playerInfo.xVelocity = 5;
+        stanceCurrent = animation.right;
     }
-    playerInfo.y += playerInfo.gravity;
-    playerInfo.x += playerInfo.friction;
+    playerInfo.y += playerInfo.yVelocity;
+    playerInfo.x += playerInfo.xVelocity;
 
     let i = -1;
     for (let p = 0; p < platformCount; p++) {
@@ -150,18 +210,20 @@ function checkStatus() {
     }
 
     // Show stance if player isn't moving
-    if (playerInfo.friction > -1 && playerInfo.friction < 1) {
-        playerInfo.stanceCurrent = playerInfo.standAnimation;
+    if (playerInfo.xVelocity > -1 && playerInfo.xVelocity < 1) {
+        stanceCurrent = animation.stand;
     }
     createCanvas();
     createPlayer();
     renderPlatform();
-
-    document.querySelector('#x_v').innerHTML = playerInfo.friction;
-    document.querySelector('#y_v').innerHTML = playerInfo.gravity;
-}   
+}
 createPlatform();
-setInterval(checkStatus, 22);
+setInterval(checkStatus, 25);
+document.addEventListener('keydown', keydown);
+document.addEventListener('keyup', keyup);
+
+
+
 
 // Original movement mechanic
 /* function main(x, y) {
@@ -196,15 +258,7 @@ setInterval(checkStatus, 22);
     }
 } */
 
-/* function move(element) {
-    element.style.position = 'fixed'
-
-    function moveToCoordinates(left, bottom) {
-        element.style.left = left + 'px'
-        element.style.bottom = bottom + 'px'
-    }
-
-    function moveWithArrowKeys(left, bottom, callback){
+    /* function moveWithArrowKeys(left, bottom, callback){
         let direction = null;
         let x = left;
         let y = bottom;
@@ -266,13 +320,7 @@ setInterval(checkStatus, 22);
             direction = null
             callback(direction)
         })
-    }
-
-    return {
-        to: moveToCoordinates,
-        withArrowKeys: moveWithArrowKeys,
-    }
-} */
+    } */
 
 /* function gravity(element) {
     let y = bottom;
