@@ -1,13 +1,13 @@
 // Ability to reset
-/* var button = document.getElementById("button");
-button.addEventListener ('DOMContentLoaded', function(){
-    function refresh() {
+var button = document.getElementById('refreshButton');
+document.getElementById('body').onload = function(){
+    console.log('DOM loaded')
+    document.getElementById('refreshButton').onclick = function(){
         window.location.reload()
+        console.log('Page reloaded')
     }
-    button.addEventListener('onclick', refresh);
-    document.addEventListener('keydown', keydown);
-    document.addEventListener('keyup', keyup);
-}) */
+    // button.addEventListener('onclick', refresh);
+};
 
 // Function to add player image
 function newPlayer(url){
@@ -54,7 +54,7 @@ ctx.canvas.width = cWidth;
 // Set player stats
 var playerInfo = {
     x: 75,
-    y: 400,
+    y: 125,
     xVelocity: 0,
     yVelocity: 0,
     jumping: true,
@@ -66,7 +66,6 @@ let stanceCurrent = "assets/stand.png"
 
 var animation = {
     jump: "assets/jump.png",
-    leftJump: "assets/jump_back.png",
     left: "assets/run_back.png",
     right: "assets/run.png",
     stand: "assets/stand.png"
@@ -80,7 +79,7 @@ if (playerInfo.xVelocity > -1 && playerInfo.xVelocity < 1) {
 function createPlayer() {
     ctx.fillStyle = "#F08080";
     img = newPlayer(stanceCurrent);
-    ctx.drawImage(img, (playerInfo.x) - playerInfo.width, (playerInfo.y) - playerInfo.height);
+    ctx.drawImage(img, (playerInfo.x + 35) - playerInfo.width, (playerInfo.y) - playerInfo.height);
 }
 
 // Movement
@@ -103,7 +102,7 @@ function keydown(e) {
     // Up arrow
     if (e.keyCode == 38) {
         if (playerInfo.jumping == false) {
-            playerInfo.yVelocity = -15;
+            playerInfo.yVelocity = -7.5;
             console.log('jump')
         }
     }
@@ -133,7 +132,8 @@ function keyup(e){
 
 // Platform creation
 var platforms = []
-var platformCount = 4;
+var platformCount = 5;
+
 function renderPlatform() {
     ctx.fillStyle = "#45597E";
     for (i = 0; i < platforms.length; i++) {
@@ -144,32 +144,31 @@ function renderPlatform() {
 // Platform location assignment
 function createPlatform() {
     for (i = 0; i < platformCount; i++) {
-        // Row 1
         platforms.push(
             {
-                x: 2.5 * (i * 100),
-                y: 275,
+                x: 2.25 * (i * 400),
+                y: 200,
                 width: 100,
                 height: 10
-            }
-        );
-        // Row 2
-        platforms.push(
+            },
             {
-                x: 2.5 * (i * 100),
-                y: 450,
-                width: 100,
+                x: 1.2 * (i + 175),
+                y: 250,
+                width: 150,
                 height: 10
-            }
-        );
-        // Row 3
-        platforms.push(
+            },
             {
-                x: 2.5 * (i * 100),
-                y: 100,
-                width: 100,
+                x: 1.2 * (i + 550),
+                y: 250,
+                width: 150,
                 height: 10
-            }
+            },
+            {
+                x: 2.25 * (i * 325),
+                y: 300,
+                width: 250,
+                height: 10
+            },
         );
     }
 }
@@ -202,7 +201,6 @@ function checkStatus() {
             i = p;
         }
     }
-
     if (i > -1) {
         playerInfo.jumping = false;
         playerInfo.y = platforms[i].y;
