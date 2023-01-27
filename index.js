@@ -27,6 +27,17 @@ function spike(x,y){
     }
 }
 
+// Add food image to canvas
+function food(x,y){
+    if(canvas.getContext){
+        var img = new Image();
+        img.src = "assets/turkey.png";
+        img.onload = function(){
+        ctx.drawImage(img,x,y)
+        }
+    }
+}
+
 // Canvas creation
 function createCanvas() {
     ctx.fillStyle = "#f2d0bf";
@@ -209,9 +220,11 @@ function checkStatus() {
     createPlayer();
     renderPlatform();
     spike(10,250);
+    food(750,200);
 }
+
 createPlatform();
-setInterval(checkStatus, 25);
+setInterval(checkStatus, 15);
 document.addEventListener('keydown', keydown);
 document.addEventListener('keyup', keyup);
 
