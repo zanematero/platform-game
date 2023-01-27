@@ -17,28 +17,67 @@ function newPlayer(url){
 };
 
 // Add spike image to canvas
-let spikes = []
-function renderSpike(x,y){
+let spikes = [
+    {
+        x: 10,
+        y: 250
+    },
+    {
+        x: 650,
+        y: 200
+    },
+    {
+        x: 500,
+        y: 165
+    }
+]
+function renderSpike(){
     if(canvas.getContext){
         var img = new Image();
         img.src = "assets/spike.png";
         img.onload = function(){
-        ctx.drawImage(img,10,250),
-        ctx.drawImage(img,650,200)
+            for (i = 0; i < spikes.length; i++) {
+                ctx.drawImage(img, spikes[i].x, spikes[i].y);
+            }
         }
     }
 }
 
 // Add food image to canvas
-let foods = []
+window.onload = function() {
+    document.getElementById("foodCollected").innerHTML = foodCollected;
+}
+let foodCollected = 0;
+var foodsCount = 3;
+let foods = [
+    {
+        x: 250,
+        y: 200,
+        width: 250,
+        height: 250
+
+    },
+    {
+        x: 750,
+        y: 200,
+        width: 250,
+        height: 250
+    },
+    {
+        x: 100,
+        y: 250,
+        width: 250,
+        height: 250
+    }
+]
 function renderFood(){
     if(canvas.getContext){
         var img = new Image();
         img.src = "assets/turkey.png";
         img.onload = function(){
-        ctx.drawImage(img,475,175),
-        ctx.drawImage(img,150,250),
-        ctx.drawImage(img,750,200)
+            for (i = 0; i < foods.length; i++) {
+                ctx.drawImage(img, foods[i].x, foods[i].y);
+            }
         }
     }
 }
@@ -96,7 +135,7 @@ var keysCurrent = {
 
 var movementGravity = 0.25;
 
-var movementFriction = 0.1;
+var movementFriction = 0.0;
 
 function keydown(e) {
     // Left arrow
@@ -140,7 +179,7 @@ var platforms = [];
 var platformCount = 5;
 
 function renderPlatform() {
-    ctx.fillStyle = "#45597E";
+    ctx.fillStyle = "#702963";
     for (i = 0; i < platforms.length; i++) {
         ctx.fillRect(platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);
     }
@@ -177,15 +216,9 @@ function createPlatform() {
             {
                 x: 2 * (i + 232.5),
                 y: 225,
-                width: 75,
+                width: 175,
                 height: 10
             },
-            {
-                x: 1 * (i + 550),
-                y: 200,
-                width: 100,
-                height: 10
-            }
         );
     };
 };
@@ -228,6 +261,7 @@ function checkStatus() {
         stanceCurrent = animation.stand;
     }
 
+    console.log(foodCollected)
     createCanvas();
     createPlayer();
     renderPlatform();
@@ -235,8 +269,32 @@ function checkStatus() {
     renderFood();
 }
 
+function checkScore() {
+    for (let i = 0; i < foodsCount; i++) {
+        if (foods[0].x < playerInfo.x && playerInfo.x < foods[0].x + foods[0].width &&
+            foods[0].y < playerInfo.y && playerInfo.y < foods[0].y + foods[0].height) {
+                foodCollected += 1
+                foodsCount -= 1
+            }
+        }
+    for (let i = 0; i < foodsCount; i++) {
+        if (foods[1].x < playerInfo.x && playerInfo.x < foods[1].x + foods[1].width &&
+            foods[1].y < playerInfo.y && playerInfo.y < foods[1].y + foods[1].height) {
+                foodCollected += 1
+                foodsCount -= 1
+            }
+        }
+    for (let i = 0; i < foodsCount; i++) {
+        if (foods[2].x < playerInfo.x && playerInfo.x < foods[2].x + foods[2].width &&
+            foods[2].y < playerInfo.y && playerInfo.y < foods[2].y + foods[2].height) {
+                foodCollected += 1
+                foodsCount -= 1
+            }
+        }
+}
 createPlatform();
 setInterval(checkStatus, 15);
+setInterval(checkScore, 25);
 document.addEventListener('keydown', keydown);
 document.addEventListener('keyup', keyup);
 
