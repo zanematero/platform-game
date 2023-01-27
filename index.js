@@ -1,12 +1,12 @@
 // Ability to reset
 var button = document.getElementById('refreshButton');
-body.onload = function() {
+window.addEventListener('load', function() {
     console.log('DOM loaded')
     button.onclick = function() {
         window.location.reload()
         console.log('Page reloaded')
     }
-}
+})
 
 // Function to add player image
 function newPlayer(url){
@@ -19,16 +19,16 @@ function newPlayer(url){
 // Add spike image to canvas
 let spikes = [
     {
-        x: 10,
-        y: 250
-    },
-    {
-        x: 650,
-        y: 200
+        x: 15,
+        y: 240,
+        width: 50,
+        height: 75
     },
     {
         x: 500,
-        y: 165
+        y: 175,
+        width: 50,
+        height: 75
     }
 ]
 function renderSpike(){
@@ -43,10 +43,10 @@ function renderSpike(){
     }
 }
 
-// Add food image to canvas
-window.onload = function() {
+// Add food image to canvas and update foodCollected count in html
+setInterval(window.onload = function() {
     document.getElementById("foodCollected").innerHTML = foodCollected;
-}
+}, 15)
 let foodCollected = 0;
 var foodsCount = 3;
 let foods = [
@@ -115,6 +115,7 @@ var animation = {
     stand: "assets/stand.png"
 };
 
+// If standing still, stand animation
 if (playerInfo.xVelocity > -1 && playerInfo.xVelocity < 1) {
     stanceCurrent = animation.stand;
 };
@@ -138,6 +139,10 @@ var movementGravity = 0.25;
 var movementFriction = 0.0;
 
 function keydown(e) {
+    // Refresh set to 'r'
+    if (e.keyCode == 82) {
+        window.location.reload()
+    }
     // Left arrow
     if (e.keyCode == 37) {
         keysCurrent.left = true;
@@ -208,13 +213,13 @@ function createPlatform() {
                 height: 10
             },
             {
-                x: 5 * (i * 325),
+                x: 5 * (i * 315),
                 y: 300,
                 width: 250,
                 height: 10
             },
             {
-                x: 2 * (i + 232.5),
+                x: 2 * (i + 220.5),
                 y: 225,
                 width: 175,
                 height: 10
@@ -223,7 +228,7 @@ function createPlatform() {
     };
 };
 
-// Logic to check and apply movement/collision
+// Logic to check and apply movement on key press and apply collision with platforms
 function checkStatus() {
     if (playerInfo.jumping == false) {
         playerInfo.xVelocity *= movementFriction;
@@ -261,7 +266,6 @@ function checkStatus() {
         stanceCurrent = animation.stand;
     }
 
-    console.log(foodCollected)
     createCanvas();
     createPlayer();
     renderPlatform();
@@ -269,48 +273,32 @@ function checkStatus() {
     renderFood();
 }
 
+// Logic to apply collision with food and spike elements
 function checkScore() {
-    for (let i = 0; i < foodsCount; i++) {
-        if (foods[0].x < playerInfo.x && playerInfo.x < foods[0].x + foods[0].width &&
-            foods[0].y < playerInfo.y && playerInfo.y < foods[0].y + foods[0].height) {
+    for (let i = 0; i < foods.length; i++) {
+        if (foods[i].x < playerInfo.x && playerInfo.x < foods[i].x + foods[i].width &&
+            foods[i].y < playerInfo.y && playerInfo.y < foods[i].y + foods[i].height) {
                 foodCollected += 1
-                foodsCount -= 1
+                foods.splice(i,1)
             }
-        }
-    for (let i = 0; i < foodsCount; i++) {
-        if (foods[1].x < playerInfo.x && playerInfo.x < foods[1].x + foods[1].width &&
-            foods[1].y < playerInfo.y && playerInfo.y < foods[1].y + foods[1].height) {
-                foodCollected += 1
-                foodsCount -= 1
+    }
+    for (let i = 0; i < spikes.length; i++) {
+        if (spikes[i].x < playerInfo.x && playerInfo.x < spikes[i].x + spikes[i].width &&
+            spikes[i].y < playerInfo.y && playerInfo.y < spikes[i].y + spikes[i].height) {
+                window.location.reload()
             }
-        }
-    for (let i = 0; i < foodsCount; i++) {
-        if (foods[2].x < playerInfo.x && playerInfo.x < foods[2].x + foods[2].width &&
-            foods[2].y < playerInfo.y && playerInfo.y < foods[2].y + foods[2].height) {
-                foodCollected += 1
-                foodsCount -= 1
-            }
-        }
+    }
 }
 createPlatform();
 setInterval(checkStatus, 15);
 setInterval(checkScore, 25);
+// Win screen
+setInterval(
+    function() {
+if (foodCollected === 3) {
+    window.alert('You won!')
+}}, 1000)
 document.addEventListener('keydown', keydown);
 document.addEventListener('keyup', keyup);
 
-// spike logic
-
-// const spike = 
-// if player intersects with element, player is reset
-
-// if user intersects star then remove star and increase score count
-
-// when all star(s) collected
-// win event including replay option
-// include score and possibly time?
-
-// reset button, resets time, position, health, score, stars
-// track time, begins on load
-/* addEventListener(onload, () => {
-    
-}) */
+// STRETCH GOAL: track time ability to beat previous score, begins on load (stopwatch)
