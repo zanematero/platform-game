@@ -17,23 +17,28 @@ function newPlayer(url){
 };
 
 // Add spike image to canvas
-function spike(x,y){
+let spikes = []
+function renderSpike(x,y){
     if(canvas.getContext){
         var img = new Image();
         img.src = "assets/spike.png";
         img.onload = function(){
-        ctx.drawImage(img,x,y)
+        ctx.drawImage(img,10,250),
+        ctx.drawImage(img,650,200)
         }
     }
 }
 
 // Add food image to canvas
-function food(x,y){
+let foods = []
+function renderFood(){
     if(canvas.getContext){
         var img = new Image();
         img.src = "assets/turkey.png";
         img.onload = function(){
-        ctx.drawImage(img,x,y)
+        ctx.drawImage(img,475,175),
+        ctx.drawImage(img,150,250),
+        ctx.drawImage(img,750,200)
         }
     }
 }
@@ -175,6 +180,12 @@ function createPlatform() {
                 width: 75,
                 height: 10
             },
+            {
+                x: 1 * (i + 550),
+                y: 200,
+                width: 100,
+                height: 10
+            }
         );
     };
 };
@@ -216,11 +227,12 @@ function checkStatus() {
     if (playerInfo.xVelocity > -1 && playerInfo.xVelocity < 1) {
         stanceCurrent = animation.stand;
     }
+
     createCanvas();
     createPlayer();
     renderPlatform();
-    spike(10,250);
-    food(750,200);
+    renderSpike();
+    renderFood();
 }
 
 createPlatform();
