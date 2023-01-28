@@ -2,15 +2,22 @@ body {
     background-color: rgb(182, 135, 226);
 }
 
+header {
+    position: relative;
+    height: 7.5em;
+}
+
 header > h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     font-size: 3em;
     color: orange;
     text-shadow: 3.5px 3.5px rgb(64, 0, 132);
+    margin-left: 30%;
 }
 
 main {
+    position: relative;
     height: 35em;
     width: 65em;
     background-color: white;
@@ -73,4 +80,30 @@ button:hover {
     font-weight: bolder;
     border: none;
     box-shadow: 0.25em 0.25em 0.5em rgb(0, 0, 0);
+}
+
+canvas {
+    position: absolute;
+}
+
+#title {
+    position: absolute;
+}
+
+#winner {
+    position: absolute;
+}
+
+.won {
+    opacity: 1;
+    position: absolute;
+}
+
+.wonTitle {
+    opacity: 0;
+    position: absolute;
+}
+
+.opacity {
+    opacity: 0;
 }

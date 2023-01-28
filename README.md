@@ -8,3 +8,4 @@ However, be careful with your movement as there are many platforms to traverse a
 You will also need to keep an eye out for dangerous spikes!
 If you touch one of these, you will be forcefully reset from the beginning.
 Goodluck!
+(hint: to jump over spikes, jump straight up THEN once high enough, move right. You can do it!)

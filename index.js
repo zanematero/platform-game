@@ -22,13 +22,13 @@ let spikes = [
         x: 15,
         y: 240,
         width: 50,
-        height: 75
+        height: 60
     },
     {
         x: 500,
         y: 175,
         width: 50,
-        height: 75
+        height: 60
     }
 ]
 function renderSpike(){
@@ -228,6 +228,16 @@ function createPlatform() {
     };
 };
 
+// Play you won tag
+function win() {
+    var element = document.getElementById("winner");
+    element.classList.add("won")
+    var element = document.getElementById("winner");
+    element.classList.remove("opacity")
+    var element = document.getElementById("title");
+    element.classList.add("wonTitle")
+}
+
 // Logic to check and apply movement on key press and apply collision with platforms
 function checkStatus() {
     if (playerInfo.jumping == false) {
@@ -296,7 +306,7 @@ setInterval(checkScore, 25);
 setInterval(
     function() {
 if (foodCollected === 3) {
-    window.alert('You won!')
+    win()
 }}, 1000)
 document.addEventListener('keydown', keydown);
 document.addEventListener('keyup', keyup);
