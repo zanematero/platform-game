@@ -1,46 +1,68 @@
+.column {
+  margin-left: 3.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.column .card {
+  height: 37vh;
+  background-color: white;
+  border: 0.5rem solid #84EE2B;
+  border-radius: 2.5em;
+}
+.column .card .cardTitle {
+  margin: 1rem -1rem -1rem -1rem;
+  font-size: 3rem;
+  text-align: center;
+  color: #303030;
+  font-family: sans-serif;
+  text-shadow: 0.2rem 0.2rem #84EE2B;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: bolder;
+}
+.column .card li {
+  margin-top: 2rem;
+  margin-left: -1rem;
+  padding-right: 1rem;
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 #body {
   background-color: #303030;
+}
+
+header {
+  margin-top: -2rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  text-align: center;
+  justify-content: center;
+}
+header h1 {
+  font-family: sans-serif;
+  color: white;
+  font-size: 3rem;
+  text-shadow: 0.2rem 0.2rem #84EE2B;
+}
+
+.row {
   display: flex;
   flex-wrap: wrap;
 }
 
-header {
-  flex-basis: 100%;
-  justify-content: space-evenly;
-}
-header h1 {
-  font-family: sans-serif;
-  color: #84EE2B;
-  font-size: 3rem;
-  text-shadow: 0.5rem 0.5rem white;
-}
-
 main {
-  flex-grow: 7;
+  width: 70vw;
   background-color: #303030;
 }
-
-article {
-  background-color: white;
-  border: 0.5rem double #84EE2B;
-  border-radius: 2.5em;
-}
-article h1 {
-  font-weight: bold;
-  text-align: center;
-  color: #303030;
-  font-family: sans-serif;
-  text-shadow: 0.5rem 0.5rem #84EE2B;
-}
-article li {
-  text-align: center;
-  font-weight: bold;
-}
-
-p {
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: bolder;
+main canvas {
+  border-radius: 1rem;
+  border: 1em solid #84EE2B;
 }
 
 li {
@@ -72,11 +94,6 @@ button:hover {
   box-shadow: 0.25em 0.25em 0.5em rgb(0, 0, 0);
 }
 
-canvas {
-  border-radius: 1em;
-  border: 1em solid #84EE2B;
-}
-
 .won {
   opacity: 1;
 }
@@ -89,6 +106,24 @@ canvas {
   opacity: 0;
 }
 
-#foodCollected {
+#winner {
+  position: absolute;
+}
+
+footer {
+  display: flex;
+  justify-content: space-evenly;
+}
+footer .food {
+  color: white;
+  margin-top: -1rem;
+}
+footer .food .foodText {
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: bolder;
+}
+footer .food .foodText #foodCollected {
+  color: #84EE2B;
   font-family: sans-serif;
 }/*# sourceMappingURL=style.css.map */
