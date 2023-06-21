@@ -134,7 +134,7 @@ var keysCurrent = {
     jump: false
 };
 
-var movementGravity = 0.25;
+var movementGravity = 0.2;
 
 var movementFriction = 0.0;
 
