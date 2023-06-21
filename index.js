@@ -20,7 +20,7 @@ function newPlayer(url){
 let spikes = [
     {
         x: 15,
-        y: 240,
+        y: 250,
         width: 50,
         height: 60
     },
