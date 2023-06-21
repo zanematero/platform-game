@@ -20,7 +20,7 @@ function newPlayer(url){
 let spikes = [
     {
         x: 15,
-        y: 240,
+        y: 250,
         width: 50,
         height: 60
     },
@@ -134,7 +134,7 @@ var keysCurrent = {
     jump: false
 };
 
-var movementGravity = 0.25;
+var movementGravity = 0.2;
 
 var movementFriction = 0.0;
 
