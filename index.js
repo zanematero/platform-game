@@ -84,7 +84,7 @@ function renderFood(){
 
 // Canvas creation
 function createCanvas() {
-    ctx.fillStyle = "#f2d0bf";
+    ctx.fillStyle = "#E1FFDA";
     ctx.fillRect(0, 0, 1040, 560);
 };
 
@@ -134,7 +134,7 @@ var keysCurrent = {
     jump: false
 };
 
-var movementGravity = 0.25;
+var movementGravity = 0.2;
 
 var movementFriction = 0.0;
 
@@ -184,7 +184,7 @@ var platforms = [];
 var platformCount = 5;
 
 function renderPlatform() {
-    ctx.fillStyle = "#702963";
+    ctx.fillStyle = "#727272";
     for (i = 0; i < platforms.length; i++) {
         ctx.fillRect(platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);
     }

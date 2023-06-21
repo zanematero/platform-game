@@ -1,0 +1,25 @@
+$primary-color: white;
+$secondary-color: #303030;
+$tertiary-color: #84EE2B;
+$main-font: sans-serif;
+$font-size: 1.5rem;
+
+@mixin text-shadow ($color) {
+    text-shadow: 0.2rem 0.2rem check_color($color);
+}
+
+@mixin border () {
+    border: 0.5rem solid $tertiary-color;
+    border-radius: 2.5em;
+}
+
+@mixin flexed() {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@mixin text()  {
+    text-align: center;
+    font-family: $main-font;
+    font-weight: bolder;
+}

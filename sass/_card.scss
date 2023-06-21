@@ -1,0 +1,34 @@
+@import "variables", "functions";
+
+.column {
+    margin-left: 3.25rem;
+    @include flexed;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    .card {
+        height: 37vh;
+        background-color: $primary-color;
+        @include border;
+
+        .cardTitle {
+            margin: 1rem -1rem -1rem -1rem;
+            font-size: make_title($font-size);
+            text-align: center;
+            color: $secondary-color;
+            font-family: $main-font;
+            @include text-shadow($tertiary-color);
+            @include text;
+        }
+
+        li {
+            margin-top: 2rem;
+            margin-left: -1rem;
+            padding-right: 1rem;
+            font-family: $main-font;
+            text-align: center;
+            font-weight: bold;
+            font-size: $font-size/1.5;
+        }
+    }
+}

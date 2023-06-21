@@ -1,0 +1,94 @@
+#body {
+  background-color: #303030;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+header {
+  flex-basis: 100%;
+  justify-content: space-evenly;
+}
+header h1 {
+  font-family: sans-serif;
+  color: #84EE2B;
+  font-size: 3rem;
+  text-shadow: 0.5rem 0.5rem white;
+}
+
+main {
+  flex-grow: 7;
+  background-color: #303030;
+}
+
+article {
+  background-color: white;
+  border: 0.5rem double #84EE2B;
+  border-radius: 2.5em;
+}
+article h1 {
+  font-weight: bold;
+  text-align: center;
+  color: #303030;
+  font-family: sans-serif;
+  text-shadow: 0.5rem 0.5rem #84EE2B;
+}
+article li {
+  text-align: center;
+  font-weight: bold;
+}
+
+p {
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: bolder;
+}
+
+li {
+  text-align: center;
+  color: black;
+  font-family: sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  text-decoration: none;
+  background-color: #84EE2B;
+  color: black;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0.25em 0.25em 0.25em black;
+  border-radius: 1.25em;
+}
+button:hover {
+  width: 5.5em;
+  height: 3.33em;
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+  border: none;
+  box-shadow: 0.25em 0.25em 0.5em rgb(0, 0, 0);
+}
+
+canvas {
+  border-radius: 1em;
+  border: 1em solid #84EE2B;
+}
+
+.won {
+  opacity: 1;
+}
+
+.wonTitle {
+  opacity: 0;
+}
+
+.opacity {
+  opacity: 0;
+}
+
+#foodCollected {
+  font-family: sans-serif;
+}/*# sourceMappingURL=style.css.map */

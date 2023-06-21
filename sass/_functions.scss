@@ -1,0 +1,10 @@
+@function make_title($font) {
+    @return $font * 2
+};
+
+@function check_color($color) {
+    @if typeOf($color) != 'string' {
+        @warn 'Color must be valid color type.'
+    };
+    @return $color
+}
