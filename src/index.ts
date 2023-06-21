@@ -1,15 +1,15 @@
 // Ability to reset
-var button = document.getElementById('refreshButton');
+var button: HTMLElement | null = document.getElementById('refreshButton');
 window.addEventListener('load', function() {
     console.log('DOM loaded')
-    button.onclick = function() {
+    button!.onclick = function() {
         window.location.reload()
         console.log('Page reloaded')
     }
 })
 
 // Function to add player image
-function newPlayer(url){
+function newPlayer(url : string){
     let image = document.createElement('img');
     image.src = url;
     image.style.position = 'absolute';
@@ -138,7 +138,7 @@ var movementGravity = 0.2;
 
 var movementFriction = 0.0;
 
-function keydown(e) {
+function keydown(e: KeyboardEvent) {
     // Refresh set to 'r'
     if (e.keyCode == 82) {
         window.location.reload()
@@ -162,7 +162,7 @@ function keydown(e) {
     }
 }
 
-function keyup(e){
+function keyup(e: KeyboardEvent){
     if (e.keyCode == 37) {
         keysCurrent.left = false;
         console.log('left')
@@ -180,7 +180,7 @@ function keyup(e){
 };
 
 // Platform creation
-var platforms = [];
+var platforms: object[] = [];
 var platformCount = 5;
 
 function renderPlatform() {
@@ -231,11 +231,11 @@ function createPlatform() {
 // Play you won tag
 function win() {
     var element = document.getElementById("winner");
-    element.classList.add("won")
+    element!.classList.add("won")
     var element = document.getElementById("winner");
-    element.classList.remove("opacity")
+    element!.classList.remove("opacity")
     var element = document.getElementById("title");
-    element.classList.add("wonTitle")
+    element!.classList.add("wonTitle")
 }
 
 // Logic to check and apply movement on key press and apply collision with platforms
